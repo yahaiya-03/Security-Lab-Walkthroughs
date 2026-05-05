@@ -1,0 +1,15 @@
+## Lab: Arbitrary Object Injection in PHP
+
+### 🔍 Objective
+Manipulate a serialized session cookie to inject a malicious object and achieve remote code execution.
+
+### 🛠️ Methodology
+1.  **Analysis:** Noticed a base64-encoded PHP serialized object in the session cookie.
+2.  **Decoding:** Decoded the string to find object attributes like `user_admin=false`.
+3.  **Tampering:** Modified the serialized string to change the boolean value to `true` and injected a magic method payload to delete a file (`__destruct`).
+4.  **Re-encoding:** Base64-encoded the malicious string and replaced the original cookie.
+5.  **Impact:** Successfully bypassed administrative checks and triggered unintended server-side logic.
+
+### 💡 Remediation
+*   **Safe Data Formats:** Use pure data formats like JSON or XML instead of native serialization.
+*   **Integrity Checks:** If serialization is necessary, implement digital signatures (HMAC) to prevent tampering.
