@@ -1,0 +1,15 @@
+## Lab: Remote Code Execution via Polyglot Web Shell Upload
+
+### 🔍 Objective
+Bypass file type restrictions to upload a PHP web shell disguised as an image file.
+
+### 🛠️ Methodology
+1.  **Analysis:** The application only allows `.jpg` or `.png` uploads for profile pictures.
+2.  **Bypass:** Created a polyglot file that contains valid image metadata but also includes a PHP payload: `<?php echo file_get_contents('/etc/passwd'); ?>`.
+3.  **Upload:** Intercepted the request and changed the filename to `shell.php` while keeping the `Content-Type` as `image/jpeg`.
+4.  **Execution:** Accessed the uploaded file directly via the browser, triggering the PHP engine to execute the code.
+5.  **Impact:** Unauthorized access to sensitive system files and potential for persistent backdoor access.
+
+### 💡 Remediation
+*   **Filename Sanitization:** Never trust the user-supplied filename; rename files to a random UUID on the server.
+*   **Execution Prevention:** Configure the web server to disable execution permissions in the upload directory.
