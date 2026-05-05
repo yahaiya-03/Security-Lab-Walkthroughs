@@ -1,0 +1,14 @@
+## Analysis: AWS S3 Bucket Misconfiguration & Data Leakage
+
+### 🔍 Objective
+Identify and exploit publicly accessible AWS S3 buckets to demonstrate the risks of improper access control settings.
+
+### 🛠️ Methodology
+1.  **Reconnaissance:** Used `s3scanner` and manual enumeration to find bucket names associated with the target domain.
+2.  **Permission Testing:** Executed `aws s3 ls s3://[bucket-name] --no-sign-request` to check for public listing permissions.
+3.  **Data Extraction:** Identified sensitive files (e.g., `config.php`, `backup.sql`) and downloaded them using `aws s3 cp`.
+4.  **Impact:** Unauthorized access to database credentials and customer PII (Personally Identifiable Information).
+
+### 💡 Remediation
+*   **Block Public Access:** Enable the "Block Public Access" setting at the AWS Account level.
+*   **IAM Policies:** Implement the Principle of Least Privilege (PoLP) and use Bucket Policies to restrict access to specific IAM roles[cite: 1].
