@@ -1,0 +1,14 @@
+## Lab: SQL Injection UNION Attack
+
+### 🔍 Objective
+Extract sensitive database information (usernames/passwords) from a hidden table.
+
+### 🛠️ Methodology
+1.  **Column Discovery:** Used `' ORDER BY 3--` to determine the number of columns returned by the original query.
+2.  **Data Type Analysis:** Tested columns for string compatibility using `' UNION SELECT 'a','a'--`.
+3.  **Data Extraction:** Executed the final payload: `' UNION SELECT username, password FROM users--`.
+4.  **Result:** Successfully retrieved administrative credentials and achieved unauthorized login.
+
+### 💡 Remediation
+*   **Parameterized Queries:** Use prepared statements to separate code from data.
+*   **Input Validation:** Implement strict allow-lists for all user-controllable parameters.
