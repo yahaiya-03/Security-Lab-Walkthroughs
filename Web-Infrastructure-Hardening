@@ -1,0 +1,14 @@
+## Methodology: Web Server Hardening via Secure Security Headers
+
+### 🔍 Objective
+Manually implement and verify security headers to mitigate common attacks like Clickjacking, XSS, and Protocol Downgrading.
+
+### 🛠️ Implementation & Verification
+1.  **HSTS (HTTP Strict Transport Security):** Enforced HTTPS by adding `Strict-Transport-Security: max-age=31536000; includeSubDomains`.
+2.  **Anti-Clickjacking:** Added `X-Frame-Options: DENY` to prevent the site from being rendered in an iframe
+3.  **MIME Sniffing Prevention:** Implemented `X-Content-Type-Options: nosniff` to prevent browsers from interpreting files as a different MIME type.
+4.  **CSP (Content Security Policy):** Developed a strict policy to allow scripts only from trusted origins, effectively mitigating Reflected XSS.
+
+### 💡 Tools Used
+*   **Burp Suite:** To verify headers in the HTTP response.
+*   **Securityheaders.com:** To audit the overall security score of the domain.
