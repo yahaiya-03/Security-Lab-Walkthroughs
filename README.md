@@ -1,8 +1,5 @@
 # Security-Lab-Walkthroughs
 Detailed technical methodologies and write-ups for PortSwigger Academy labs and Red Team internship tasks, focusing on manual exploitation and remediation.
-# Security Lab Walkthroughs & Methodologies 🛡️
-
-This repository serves as a professional portfolio of my technical journey in cybersecurity. It includes detailed write-ups for **PortSwigger Web Security Academy** labs and key methodologies developed during my **Red Team Internship**.
 
 ## 📁 Repository Structure
 *    JWT-Attacks/`: Exploiting weak signatures and bypassing authentication.
