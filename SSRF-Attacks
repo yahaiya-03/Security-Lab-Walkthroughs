@@ -1,0 +1,15 @@
+## Lab: Basic SSRF against the local server
+
+### 🔍 Objective
+Manipulate the server to make an HTTP request to its own administrative interface (http://localhost/admin) to delete a user.
+
+### 🛠️ Methodology
+1.  **Analysis:** Identified a "Check stock" feature that sends a URL in the `stockApi` parameter.
+2.  **Manipulation:** Modified the `stockApi` parameter from a legitimate URL to `http://localhost/admin`.
+3.  **Exploitation:** The server, trusting the internal request, rendered the admin panel.
+4.  **Action:** Sent a follow-up request to `http://localhost/admin/delete?username=carlos` to delete the target user.
+5.  **Impact:** Achieved unauthorized administrative actions by bypassing perimeter firewalls.
+
+### 💡 Remediation
+*   **Allow-listing:** Implement a strict allow-list of domains/IPs that the server is permitted to fetch.
+*   **Network Segregation:** Ensure the web server cannot access internal sensitive services or the metadata API.
