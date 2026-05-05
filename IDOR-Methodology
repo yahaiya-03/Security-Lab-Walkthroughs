@@ -1,0 +1,14 @@
+## Lab: Insecure Direct Object Reference (IDOR) - Accessing User Invoices
+
+### 🔍 Objective
+Access and download private invoices of other users by manipulating the file reference in the URL.
+
+### 🛠️ Methodology
+1.  **Detection:** Observed that when downloading my own invoice, the URL looked like `/download-invoice?item=10025.pdf`.
+2.  **Testing:** Guessed that the `item` parameter is a sequential ID. Changed the value to `10024.pdf`.
+3.  **Result:** The server returned a PDF belonging to a different user, as it failed to check if I was the owner of that invoice.
+4.  **Impact:** Massive data exposure of sensitive customer financial documents.
+
+### 💡 Remediation
+*   **Access Control:** Always verify user ownership of the requested object on the server side before serving the file.
+*   **Indirect References:** Use non-sequential, random GUIDs (e.g., `item=df34-ag78-pk92`) instead of predictable integers.
