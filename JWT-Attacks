@@ -1,0 +1,15 @@
+## Lab: JWT Authentication Bypass via Unverified Signature
+
+### 🔍 Objective
+Gain administrative access by exploiting a server that fails to verify the JWT signature.
+
+### 🛠️ Methodology
+1.  **Interception:** Captured the session request using Burp Suite and identified the JWT in the `Cookie` header.
+2.  **Analysis:** Decoded the JWT and found the `sub` (subject) claim set to a standard user.
+3.  **Manipulation:** Modified the `sub` claim from `user` to `admin`.
+4.  **Bypass:** Forwarded the modified token without re-signing. Since the server does not verify signatures, the administrative identity was accepted.
+5.  **Impact:** Successfully accessed the admin panel and performed restricted actions.
+
+### 💡 Remediation
+*   **Signature Enforcement:** Always verify JWT signatures on the server side using robust libraries.
+*   **Algorithm Filtering:** Explicitly reject tokens using the `none` algorithm or weak signing methods.
